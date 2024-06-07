@@ -76,6 +76,14 @@ input[type=number] {
     color: #909090;
 }
 
+.list_item.filetree .list_item_text {
+    font-weight: bold;
+}
+
+.list_item.filetree .filetree_button {
+    color: red;
+}
+
 .control_box {
     display: flex;
     border: black 1px solid;
@@ -100,6 +108,10 @@ input[type=number] {
 
 #size_picker_number {
     flex-basis: 6em;
+}
+
+#filetype_highlight_control {
+    margin: 0%;
 }
 
 .color_picker_container {
@@ -135,4 +147,36 @@ input[type=number] {
     flex-direction: column;
     align-items: center;
     width: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.checkbox_tree {
+    display: flex;
+    flex-direction: column;
+    border: black 1px solid;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    padding: 2%;
+    margin: 2%;
+}
+
+.checkbox_tree ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.checkbox_tree ul li ul {
+    margin-left: 1em;
+}
+
+.checkbox_tree ul li label {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }

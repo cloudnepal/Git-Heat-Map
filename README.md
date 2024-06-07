@@ -1,9 +1,11 @@
 # Git-Heat-Map
 
-![Map showing the files in cpython that Guido van Rossum changed the most](example_image.png)
+![Map showing the files in cpython that Guido van Rossum changed the most](img/example_image.png)
 *Map showing the files in cpython that Guido van Rossum changed the most;
 full SVG image available in repo*
 
+## Now with file extension based highlighting
+## Now with submodule support
 ## Website now available
 
 A version of this program is now available for use at [heatmap.jonathanforsythe.co.uk](https://heatmap.jonathanforsythe.co.uk)
@@ -11,17 +13,19 @@ A version of this program is now available for use at [heatmap.jonathanforsythe.
 ## Basic use guide
 
 * Generate database with `python generate_db.py {path_to_repo_dir}`
-* Install `flask` from pip
+* Create virtual environment with `python -m venv .` and install required modules with `pip install -r requirements.txt`
 * Run web server with `python app.py` or `flask run` (`flask run --host=<ip>` to run on that ip address, with `0.0.0.0` being used for all addresses on that machine)
 * Connect on `127.0.0.1:5000`
 * Available repos will be displayed, select the one you want to view
-* Add emails, commits, filenames, and date ranges you want to highlight by using the form on the right, with `%` acting as a wildcard
+* Add emails, commits, filenames, and date ranges you want to highlight
+  * The "browse" buttons allow the user to see a list of valid values
+  * Alternatively valid [sqlite](https://www.sqlite.org/lang_expr.html#:~:text=The%20LIKE%20operator%20does%20a,more%20characters%20in%20the%20string.) patterns can be passed in
 * Clicking on any of these entries will cause the query to exclude results matching that entry
-* Choose the minimum size of box to draw, with smaller numbers resulting in greater detail at the cost of performance
-* Choose the hue that you want the chart to use for highlighting
-* Press submit query
+* By default highlight hue is determined by file extensions but this can be manually overridden
+* Options affecting performance are levels of text to render, and minimum size of boxes rendered
+* Press submit query to update which files are highlighted
+* Press refresh to update highlighting hue and redraw based on window size
 * Click on directories to zoom in, and the back button in the sidebar to zoom out
-* Update text rendering depth as desired
 
 ## Project Structure
 
@@ -83,14 +87,8 @@ These times are with `minimum size drawn = 0`, on very large repositories, so th
 
 ## Wanted features
 
-### Submodule tracking
-Currently the only submodule changes that can be seen are the top level commit pointer changes. In the future would like to recursively explore submodules and add their files to the database.
-
 ### Faster database generation
 Currently done using git log which can take a very long time for large repos. Will look into any other ways of getting needed information on files.
-
-### Remembering filters
-Filters must be re-entered every time the page is loaded. Ideally filters would be remembered either through cookies or by storing the filters as a url query, which would allow users to bookmark queries.
 
 ### Multiple filters per query
 Currently the user can submit only a single query for the highlighting. Ideally they could have a separate filter dictating which boxes to draw in the first place, and possibly multiple filters that could result in multiple colour highlighting on the same image.
